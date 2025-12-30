@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy New Year</title>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div id="particles"></div>
+
+<section class="timer-section">
+  <h1 class="main-title">Happy New Year</h1>
+  <div id="countdown">Loading...</div>
+  <p class="timer-sub">Countdown to New Year 2026</p>
+</section>
+
+<section class="wish-section">
+  <div class="wish-card">
+    <h2 class="wish-text">🎉 Happy New Year! 🎉</h2>
+    <p class="from-text" id="fromText"></p>
+
+    <div class="upload-box">
+      <label for="nameInput">Enter your name as Sender:</label>
+      <input type="text" id="nameInput" placeholder="Your name here"/>
+      <label for="fileInput">Upload your photo or memories:</label>
+      <input type="file" id="fileInput" accept="image/*"/>
+      <img id="previewImg" class="preview-img" hidden/>
+      <button id="sendBtn">Send Wish</button>
+    </div>
+  </div>
+</section>
+
+<section class="quotes-section" id="quotesSection"></section>
+
+<script src="script.js"></script>
+</body>
+</html>
