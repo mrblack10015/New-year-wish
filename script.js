@@ -15,7 +15,7 @@ setInterval(() => {
 }, 1000);
 
 // DEFAULT SENDER
-let defaultSender = ${defaultSender};
+let defaultSender = "Vijith V";
 document.getElementById("fromText").innerText = `From: ${defaultSender}`;
 
 // PREVIEW IMAGE
@@ -167,4 +167,3 @@ for(let i=0;i<80;i++){
   span.innerText="✨";
   pBox.appendChild(span);
 }
-
