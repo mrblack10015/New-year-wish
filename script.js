@@ -15,7 +15,7 @@ setInterval(() => {
 }, 1000);
 
 // DEFAULT SENDER
-let defaultSender = "Vijith V";
+let defaultSender;
 document.getElementById("fromText").innerText = `From: ${defaultSender}`;
 
 // PREVIEW IMAGE
