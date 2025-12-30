@@ -14,9 +14,22 @@ setInterval(() => {
   countdown.innerHTML = `${d}d : ${h}h : ${m}m : ${s}s ✨🎊`;
 }, 1000);
 
-// DEFAULT SENDER
-let defaultSender;
-document.getElementById("fromText").innerText = `From: ${defaultSender}`;
+// DEFAULT SENDER (Not shown on UI, only used as fallback internally)
+let defaultSender = "";
+
+// Always update UI from the actual input field
+function updateSenderUI() {
+  const sender = document.getElementById("nameInput").value.trim();
+  if (sender) {
+    document.getElementById("fromText").innerText = `From: ${sender}`;
+  } else {
+    document.getElementById("fromText").innerText = ""; // shows nothing instead of your name
+  }
+}
+
+// Trigger dynamic update when user types
+document.getElementById("nameInput").addEventListener("input", updateSenderUI);
+
 
 // PREVIEW IMAGE
 document.getElementById("fileInput").addEventListener("change", (e) => {
@@ -28,16 +41,44 @@ document.getElementById("fileInput").addEventListener("change", (e) => {
   }
 });
 
-// SEND BUTTON
+// Update sender name on page
+document.getElementById("nameInput").addEventListener("input", () => {
+  const sender = document.getElementById("nameInput").value.trim();
+  document.getElementById("fromText").innerText = sender ? `From: ${sender}` : "";
+});
+
+/// Show sender name if it's present in URL
+const urlParams = new URLSearchParams(window.location.search);
+const senderFromURL = urlParams.get("sender");
+
+if (senderFromURL) {
+  document.getElementById("fromText").innerText = `From: ${senderFromURL}`;
+}
+
+// When user types name, update the page UI
+document.getElementById("nameInput").addEventListener("input", () => {
+  const sender = document.getElementById("nameInput").value.trim();
+  document.getElementById("fromText").innerText = sender ? `From: ${sender}` : "";
+});
+
+// Send button → generate link with sender name + share
 document.getElementById("sendBtn").addEventListener("click", () => {
   const sender = document.getElementById("nameInput").value.trim();
-  const finalSender = sender || defaultSender;
 
-  const message = `🎉 Happy New Year 2026! ✨\nFrom: ${finalSender}\nCheck this amazing wish: ${location.href}`;
+  if (!sender) {
+    alert("Enter your name boss 😌");
+    return;
+  }
+
+  // Create a sharable link containing the sender name
+  const shareLink = location.href.split("?")[0] + `?sender=${encodeURIComponent(sender)}`;
+
+  const message = `🎉 Happy New Year 2026! ✨\nFrom: ${sender}\nOpen my wish here: ${shareLink}`;
 
   const encoded = encodeURIComponent(message);
   window.open(`https://wa.me/?text=${encoded}`, "_blank");
 });
+
 
 // 100 QUOTES GENERATION
 const quotesBox = document.getElementById("quotesSection");
