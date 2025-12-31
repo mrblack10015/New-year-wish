@@ -14,6 +14,25 @@ setInterval(() => {
   countdown.innerHTML = `${d}d : ${h}h : ${m}m : ${s}s ✨🎊`;
 }, 1000);
 
+const heartContainer = document.querySelector(".hearts");
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerHTML = "❤️";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = 4 + Math.random() * 3 + "s";
+
+  heartContainer.appendChild(heart);
+
+  setTimeout(() => heart.remove(), 7000);
+}
+
+setInterval(createHeart, 300);
+
+
+
 // DEFAULT SENDER (Not shown on UI, only used as fallback internally)
 let defaultSender = "";
 
@@ -40,6 +59,11 @@ document.getElementById("fileInput").addEventListener("change", (e) => {
     img.hidden = false;
   }
 });
+
+document.getElementById("goDownVideoBtn").addEventListener("click", () => {
+  window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+});
+
 
 // Update sender name on page
 document.getElementById("nameInput").addEventListener("input", () => {
@@ -190,6 +214,11 @@ const quotes = [
 for(let i=0;i<quotes.length;i++){
   quotesBox.innerHTML += `<div class="quote">✨ ${quotes[i]}</div>`;
 }
+
+document.getElementById("telegramGroupBtn").addEventListener("click", () => {
+  window.open("https://t.me/+GqhfA7nMSmQ2Y2Nl", "_blank");
+});
+
 
 // BACKGROUND SOUND
 const audio = new Audio("https://assets.mixkit.co/active_storage/sfx/2993/2993-preview.mp3");
